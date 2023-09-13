@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 
 const BookPage = () => {
   const [books, setBooks] = useState([]);
@@ -20,7 +21,7 @@ const BookPage = () => {
   }, []);
 
   return (
-    <div>
+    <div className="bookpage-container">
       <h1>Book List</h1>
       <table className="table">
         <thead>
@@ -28,6 +29,7 @@ const BookPage = () => {
             <th className="col">Book ID</th>
             <th className="col">Title</th>
             <th className="col">Author</th>
+            <th className="col">Genre</th>
             <th className="col">Available For Loan</th>
           </tr>
         </thead>
@@ -38,8 +40,11 @@ const BookPage = () => {
 
               <td>{book.title}</td>
               <td>{book.author}</td>
+              <td>{book.genre}</td>
               <td>{book.isAvailableForLoan ? "Yes" : "No"}</td>
-              <td>View Edit Delete</td>
+              <td>
+                <Link to={`/Details/${book.id}`}>View</Link>
+              </td>
             </tr>
           ))}
         </tbody>
