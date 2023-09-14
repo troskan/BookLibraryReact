@@ -6,7 +6,7 @@ const CreateBookPage = () => {
   const [book, setBook] = useState({
     title: "",
     author: "",
-    genre: "",
+    genre: 1,
     publicationYear: "",
     description: "",
     isAvailableForLoan: true,
@@ -16,6 +16,15 @@ const CreateBookPage = () => {
     const { name, value } = e.target;
 
     setBook({ ...book, [name]: value });
+  };
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const request = await axios.post("https://localhost:7262/book", book);
+    } catch (error) {
+      console.log(error);
+      console.log(response.StatusCode);
+    }
   };
   const logBook = () => {
     console.clear();
@@ -38,7 +47,6 @@ const CreateBookPage = () => {
           {label}
         </label>
         <input
-          type="text"
           name={name}
           onChange={onChange}
           value={value}
@@ -56,13 +64,55 @@ const CreateBookPage = () => {
         <h1>
           <span className="text-success fade-in-out">+</span>Create Book
         </h1>
-        <FormInput
-          label="Title"
-          name="title"
-          value={book.title}
-          placeholder="Enter Title"
+        <form>
+          <FormInput
+            label="Title"
+            name="title"
+            value={book.title}
+            placeholder="Enter Title"
+            onChange={handleOnChange}
+          />
+          <FormInput
+            label="Author"
+            name="author"
+            value={book.author}
+            placeholder="Enter Author name"
+            onChange={handleOnChange}
+          />
+          <FormInput
+            label="Description"
+            name="description"
+            value={book.description}
+            placeholder="Enter book description"
+            onChange={handleOnChange}
+          />
+          <FormInput
+            label="Year Of Publication"
+            name="publicationYear"
+            value={book.publicationYear}
+            placeholder="Enter year of publication"
+            onChange={handleOnChange}
+          />
+          {/* <select
+          className="form-control m-2"
+          value={book.genre}
           onChange={handleOnChange}
-        />
+          name="genre"
+          id="genre"
+        ></select> */}
+          <label htmlFor="isAvailableForLoan">Available For Loan</label>
+          <input
+            className=""
+            type="checkbox"
+            name="isAvailableForLoan"
+            onChange={handleOnChange}
+            value={book.isAvailableForLoan}
+          />
+
+          <button onClick={onSubmit} className="btn btn-outline-success">
+            Create Book
+          </button>
+        </form>
         <button onClick={logBook} className="btn btn-success m-2">
           Log Current Book
         </button>
