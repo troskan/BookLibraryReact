@@ -30,6 +30,11 @@ const Navbar = () => {
               Book Library
             </Link>
           </li>
+          <li className="nav-item">
+            <Link className="nav-link" to="/CreateBook">
+              <span className="text-success">+</span> Create Book
+            </Link>
+          </li>
           {/* Add more links as needed */}
         </ul>
       </div>

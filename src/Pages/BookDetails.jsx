@@ -20,6 +20,8 @@ function BookDetails() {
     };
     fetchData();
   }, [id]);
+  //B114
+
   const deleteBook = async (e) => {
     try {
       const response = await axios.delete(`https://localhost:7262/book/${id}`);
@@ -28,6 +30,7 @@ function BookDetails() {
       console.error("An error occurred while trying to delete book: ", error);
     }
   };
+
   return (
     <div>
       <div className="bookpage-container">
