@@ -1,73 +1,39 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   return (
-    <header className="p-3 bg-dark text-white">
-      <div className="container">
-        <div className="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-          <a
-            href="/"
-            className="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none"
-          >
-            <svg
-              className="bi me-2"
-              width="40"
-              height="32"
-              role="img"
-              aria-label="Bootstrap"
-            >
-              <use xlinkHref="#bootstrap" />
-            </svg>
-          </a>
-
-          <ul className="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-            <li>
-              <a href="#" className="nav-link px-2 text-secondary">
-                Home
-              </a>
-            </li>
-            <li>
-              <a href="#" className="nav-link px-2 text-white">
-                Features
-              </a>
-            </li>
-            <li>
-              <a href="#" className="nav-link px-2 text-white">
-                Pricing
-              </a>
-            </li>
-            <li>
-              <a href="#" className="nav-link px-2 text-white">
-                FAQs
-              </a>
-            </li>
-            <li>
-              <a href="#" className="nav-link px-2 text-white">
-                About
-              </a>
-            </li>
-          </ul>
-
-          <form className="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
-            <input
-              type="search"
-              className="form-control form-control-dark"
-              placeholder="Search..."
-              aria-label="Search"
-            />
-          </form>
-
-          <div className="text-end">
-            <button type="button" className="btn btn-outline-light me-2">
-              Login
-            </button>
-            <button type="button" className="btn btn-warning">
-              Sign-up
-            </button>
-          </div>
-        </div>
+    <nav className="navbar navbar-expand-lg navbar-light bg-light">
+      <Link className="navbar-brand" to="/">
+        BookApp
+      </Link>
+      <button
+        className="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarNav"
+        aria-controls="navbarNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span className="navbar-toggler-icon"></span>
+      </button>
+      <div className="collapse navbar-collapse" id="navbarNav">
+        <ul className="navbar-nav">
+          <li className="nav-item active">
+            <Link className="nav-link" to="/">
+              Home
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Link className="nav-link" to="/BookLibrary">
+              Book Library
+            </Link>
+          </li>
+          {/* Add more links as needed */}
+        </ul>
       </div>
-    </header>
+    </nav>
   );
 };
 

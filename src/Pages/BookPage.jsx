@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import "../App.css";
 
 const BookPage = () => {
   const [books, setBooks] = useState([]);
@@ -37,13 +38,28 @@ const BookPage = () => {
           {books.map((book) => (
             <tr key={book.id}>
               <th scope="row">{book.bookId}</th>
-
               <td>{book.title}</td>
               <td>{book.author}</td>
               <td>{book.genre}</td>
-              <td>{book.isAvailableForLoan ? "Yes" : "No"}</td>
               <td>
-                <Link to={`/Details/${book.id}`}>View</Link>
+                {book.isAvailableForLoan ? (
+                  <>
+                    <span
+                      className="bg-success text-white p-1 d-inline-block rounded-circle"
+                      style={{ width: "10px", height: "10px" }}
+                    ></span>
+                  </>
+                ) : (
+                  <>
+                    <span
+                      className="bg-danger text-white p-1 d-inline-block rounded-circle"
+                      style={{ width: "10px", height: "10px" }}
+                    ></span>
+                  </>
+                )}
+              </td>
+              <td>
+                <Link to={`/Details/${book.bookId}`}>View</Link>
               </td>
             </tr>
           ))}

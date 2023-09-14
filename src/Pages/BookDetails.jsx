@@ -3,12 +3,15 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 
 function BookDetails() {
-  const [book, setBook] = useState([]);
+  const [book, setBook] = useState({});
+  const [bookToDelete, setBookToDelete] = useState({});
   const { id } = useParams();
+  console.log("ID from useParams:", id);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
+        console.log("ID from useParams:", id);
         const response = await axios.get(`https://localhost:7262/book/${id}`);
         setBook(response.data.result);
       } catch (error) {
@@ -17,10 +20,19 @@ function BookDetails() {
     };
     fetchData();
   }, [id]);
+  const deleteBook = async (e) => {
+    try {
+      const response = await axios.delete(`https://localhost:7262/book/${id}`);
+      setBookToDelete(response.data.result);
+    } catch (error) {
+      console.error("An error occurred while trying to delete book: ", error);
+    }
+  };
   return (
     <div>
-      <h2>Book details</h2>
-      <div>
+      <div className="bookpage-container">
+        <h2>Book details</h2>
+
         <ul className="list-group">
           <li className="list-group-item">
             <span className="bold">Title:</span> {book.title}
@@ -62,7 +74,11 @@ function BookDetails() {
         <a href={`/edit/${book.bookId}`} className="btn btn-success">
           Edit
         </a>
-        <a href={`/delete/${book.bookId}`} className="btn btn-danger">
+        <a
+          onClick={deleteBook}
+          href={`/delete/${book.bookId}`}
+          className="btn btn-danger"
+        >
           Delete
         </a>
       </div>

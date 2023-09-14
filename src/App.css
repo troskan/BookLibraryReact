@@ -1,27 +1,13 @@
 #root {
+  box-shadow: 0px 0px 100px 0px rgba(0, 0, 0, 0.9),
+    0px 0px 100px 0px rgba(0, 0, 0, 0.9);
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
-}
+  background-color: rgba(0, 0, 0, 0.411);
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+  min-height: 100vh;
 }
 
 .card {
@@ -33,10 +19,44 @@
 }
 
 body {
-  background-image: url("https://media3.giphy.com/media/w8xvymsStCpQA/giphy.gif?cid=6c09b952lz1wc52hpc081kjs7xpr9441shb51rhxiffs6t5y&ep=v1_gifs_search&rid=giphy.gif&ct=g");
+  background-image: url("https://images.unsplash.com/10/caroline_sada_landscape.jpg?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2000&q=80");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+nav {
+  border-radius: 25px;
+  padding: 1rem !important;
+  margin-bottom: 1rem;
 }
 .bookpage-container {
   background-color: white;
   padding: 3.5rem;
   border-radius: 25px;
+}
+.home-container {
+  display: flex;
+  justify-content: center;
+  background-color: rgba(255, 255, 255, 0.596);
+  border-radius: 25px;
+  padding: 1rem;
+}
+.home-content {
+  display: flex;
+  justify-content: center;
+  max-width: 50rem;
+  flex-direction: column;
+}
+.home-container p {
+  font-size: 20px;
+}
+
+#react {
+  color: rgb(227, 255, 255);
+}
+#vite {
+  color: blueviolet;
+}
+
+th {
+  border: 3px solid rgb(0, 0, 0) !important;
 }
