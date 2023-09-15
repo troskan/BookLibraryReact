@@ -1,29 +1,43 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const CreateBookPage = () => {
   const [book, setBook] = useState({
     title: "",
     author: "",
-    genre: 1,
-    publicationYear: "",
+    genre: "Comedy",
+    publicationYear: 0,
     description: "",
     isAvailableForLoan: true,
   });
-
+  let navigate = useNavigate();
   const handleOnChange = (e) => {
-    const { name, value } = e.target;
-
-    setBook({ ...book, [name]: value });
+    const { name, value, type, checked } = e.target;
+    if (type === "checkbox") {
+      setBook({ ...book, [name]: Boolean(checked) }); // Explicit conversion to Boolean
+    } else {
+      setBook({ ...book, [name]: value });
+    }
   };
+
   const onSubmit = async (e) => {
     e.preventDefault();
+
     try {
-      const request = await axios.post("https://localhost:7262/book", book);
+      console.log("Payload being sent to server: ", book); // Debugging line
+      const response = await axios.post("https://localhost:7262/book", book);
+      console.log(response.data);
+      navigate("/BookLibrary");
     } catch (error) {
       console.log(error);
-      console.log(response.StatusCode);
+      if (error.response) {
+        console.log("Server responded with a status:", error.response.status);
+        console.log("Response data:", error.response.data);
+      } else {
+        console.log("The request was made but no response was received");
+      }
     }
   };
   const logBook = () => {
@@ -33,30 +47,6 @@ const CreateBookPage = () => {
   const clearConsole = () => {
     console.clear();
   };
-  const FormInput = ({
-    label,
-    name,
-    value,
-    placeholder,
-    onChange,
-    additionalClass,
-  }) => {
-    return (
-      <>
-        <label className={`form m-2 ${additionalClass}`} htmlFor={name}>
-          {label}
-        </label>
-        <input
-          name={name}
-          onChange={onChange}
-          value={value}
-          placeholder={placeholder}
-          className={`form-control m-2 ${additionalClass}`}
-          required
-        />
-      </>
-    );
-  };
 
   return (
     <div className="d-flex flex-column justify-content-center align-items-center item border-5">
@@ -65,50 +55,72 @@ const CreateBookPage = () => {
           <span className="text-success fade-in-out">+</span>Create Book
         </h1>
         <form>
-          <FormInput
-            label="Title"
+          <label className={`form m-2`} htmlFor="title">
+            Title
+          </label>
+          <input
+            type="text"
             name="title"
+            onChange={handleOnChange}
             value={book.title}
-            placeholder="Enter Title"
-            onChange={handleOnChange}
+            placeholder="Enter book title"
+            className={`form-control m-2`}
+            required
           />
-          <FormInput
-            label="Author"
+          <label className={`form m-2`} htmlFor="author">
+            Author
+          </label>
+          <input
+            type="text"
             name="author"
+            onChange={handleOnChange}
             value={book.author}
-            placeholder="Enter Author name"
-            onChange={handleOnChange}
+            placeholder="Enter name of author"
+            className={`form-control m-2`}
+            required
           />
-          <FormInput
-            label="Description"
+          <label className={`form m-2`} htmlFor="description">
+            Description
+          </label>
+          <input
+            type="text"
             name="description"
+            onChange={handleOnChange}
             value={book.description}
-            placeholder="Enter book description"
-            onChange={handleOnChange}
+            placeholder="Book description.."
+            className={`form-control m-2`}
+            required
           />
-          <FormInput
-            label="Year Of Publication"
+          <label className={`form m-2`} htmlFor="publicationYear">
+            Year of publication
+          </label>
+          <input
+            type="number"
             name="publicationYear"
-            value={book.publicationYear}
-            placeholder="Enter year of publication"
             onChange={handleOnChange}
+            value={book.publicationYear}
+            placeholder="Year of publiation.."
+            className={`form-control m-2`}
+            required
           />
+          <label className={`form m-2`} htmlFor="genre">
+            Year of publication
+          </label>
           {/* <select
-          className="form-control m-2"
-          value={book.genre}
-          onChange={handleOnChange}
-          name="genre"
-          id="genre"
-        ></select> */}
+            className="form-control m-2"
+            value={book.genre}
+            onChange={handleOnChange}
+            name="genre"
+            id="genre"
+          ></select> */}
           <label htmlFor="isAvailableForLoan">Available For Loan</label>
           <input
             className=""
             type="checkbox"
             name="isAvailableForLoan"
             onChange={handleOnChange}
-            value={book.isAvailableForLoan}
+            checked={book.isAvailableForLoan} // Notice the use of 'checked' here instead of 'value'
           />
-
           <button onClick={onSubmit} className="btn btn-outline-success">
             Create Book
           </button>

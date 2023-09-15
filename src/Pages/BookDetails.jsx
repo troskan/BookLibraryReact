@@ -23,11 +23,18 @@ function BookDetails() {
   //B114
 
   const deleteBook = async (e) => {
-    try {
-      const response = await axios.delete(`https://localhost:7262/book/${id}`);
-      setBookToDelete(response.data.result);
-    } catch (error) {
-      console.error("An error occurred while trying to delete book: ", error);
+    if (window.confirm("Are you sure you want to delete this book?")) {
+      // Confirm box
+      try {
+        const response = await axios.delete(
+          `https://localhost:7262/book/${id}`
+        );
+        setBookToDelete(response.data.result);
+        window.alert("Book successfully deleted."); // Alert after successful deletion
+      } catch (error) {
+        console.error("An error occurred while trying to delete book: ", error);
+        window.alert("Failed to delete the book."); // Alert on error
+      }
     }
   };
 
