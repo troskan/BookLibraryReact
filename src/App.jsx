@@ -7,6 +7,7 @@ import BookDetails from "./Pages/BookDetails";
 import Navbar from "./Pages/Navbar";
 import HomePage from "./Pages/HomePage";
 import CreateBookPage from "./Pages/CreateBookPage";
+import EditBookPage from "./Pages/EditBookPage";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
                 <Route path="/" element={<HomePage />} />
                 <Route path="/BookLibrary" element={<BookPage />} />
                 <Route path="/CreateBook" element={<CreateBookPage />} />
+                <Route path="/EditBook/:id" element={<EditBookPage />} />
                 <Route path="/Details/:id" element={<BookDetails />} />
               </Routes>
             </main>

@@ -31,6 +31,7 @@ const BookPage = () => {
             <th className="col">Title</th>
             <th className="col">Author</th>
             <th className="col">Genre</th>
+            <th className="col">Year</th>
             <th className="col">Available For Loan</th>
           </tr>
         </thead>
@@ -41,6 +42,7 @@ const BookPage = () => {
               <td>{book.title}</td>
               <td>{book.author}</td>
               <td>{book.genre}</td>
+              <td>{book.publicationYear}</td>
               <td>
                 {book.isAvailableForLoan ? (
                   <>

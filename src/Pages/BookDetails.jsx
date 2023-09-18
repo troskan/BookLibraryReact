@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import EditBookPage from "./EditBookPage";
 
 function BookDetails() {
   const [book, setBook] = useState({});
@@ -81,15 +83,19 @@ function BookDetails() {
             )}
           </li>
         </ul>
-        <a href={`/edit/${book.bookId}`} className="btn btn-success">
-          Edit
-        </a>
+        <Link to={`/EditBook/${book.bookId}`}>
+          {" "}
+          <button className="btn btn-success">Edit</button>
+        </Link>
         <a
           onClick={deleteBook}
           href={`/delete/${book.bookId}`}
           className="btn btn-danger"
         >
           Delete
+        </a>
+        <a href={`/BookLibrary`} className="m-5 btn btn-primary">
+          Back
         </a>
       </div>
     </div>
