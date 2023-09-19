@@ -73,10 +73,9 @@ nav {
   color: blueviolet;
 }
 
-th {
-  border: 3px solid rgb(0, 0, 0) !important;
+.search {
+  background-color: rgb(216, 216, 216) !important;
 }
-
 @keyframes fadeInOut {
   0% {
     opacity: 1;

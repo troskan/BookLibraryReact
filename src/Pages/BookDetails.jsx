@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import EditBookPage from "./EditBookPage";
 
 function BookDetails() {
@@ -9,6 +10,7 @@ function BookDetails() {
   const [bookToDelete, setBookToDelete] = useState({});
   const { id } = useParams();
   console.log("ID from useParams:", id);
+  let navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -32,7 +34,9 @@ function BookDetails() {
           `https://localhost:7262/book/${id}`
         );
         setBookToDelete(response.data.result);
-        window.alert("Book successfully deleted."); // Alert after successful deletion
+        window.alert("Book successfully deleted.");
+
+        navigate("/BookLibrary");
       } catch (error) {
         console.error("An error occurred while trying to delete book: ", error);
         window.alert("Failed to delete the book."); // Alert on error
@@ -87,11 +91,7 @@ function BookDetails() {
           {" "}
           <button className="btn btn-success">Edit</button>
         </Link>
-        <a
-          onClick={deleteBook}
-          href={`/delete/${book.bookId}`}
-          className="btn btn-danger"
-        >
+        <a onClick={deleteBook} className="btn btn-danger">
           Delete
         </a>
         <a href={`/BookLibrary`} className="m-5 btn btn-primary">

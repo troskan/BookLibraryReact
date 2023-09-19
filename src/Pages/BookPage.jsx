@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import "../App.css";
+import SearchComp from "../Components/SearchComponent";
 
 const BookPage = () => {
   const [books, setBooks] = useState([]);
@@ -24,6 +25,7 @@ const BookPage = () => {
   return (
     <div className="bookpage-container">
       <h1>Book List</h1>
+      <SearchComp setBooks={setBooks} />{" "}
       <table className="table">
         <thead>
           <tr>

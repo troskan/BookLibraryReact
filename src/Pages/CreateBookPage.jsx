@@ -7,8 +7,8 @@ const CreateBookPage = () => {
   const [book, setBook] = useState({
     title: "",
     author: "",
-    genre: "Comedy",
-    publicationYear: 0,
+    genre: "Classic",
+    publicationYear: 1955,
     description: "",
     isAvailableForLoan: true,
   });
@@ -104,15 +104,22 @@ const CreateBookPage = () => {
             required
           />
           <label className={`form m-2`} htmlFor="genre">
-            Year of publication
+            Genre
           </label>
-          {/* <select
+          <label className={`form m-2`} htmlFor="genre"></label>
+          <select
             className="form-control m-2"
             value={book.genre}
             onChange={handleOnChange}
             name="genre"
             id="genre"
-          ></select> */}
+          >
+            <option value="Classic">Classic</option>
+            <option value="Comedy">Comedy</option>
+            <option value="Drama">Drama</option>
+            <option value="Fantasy">Fantasy</option>
+            <option value="Science Fiction">Science Fiction</option>
+          </select>
           <label htmlFor="isAvailableForLoan">Available For Loan</label>
           <input
             className=""
@@ -121,6 +128,7 @@ const CreateBookPage = () => {
             onChange={handleOnChange}
             checked={book.isAvailableForLoan} // Notice the use of 'checked' here instead of 'value'
           />
+          <br />
           <button onClick={onSubmit} className="btn btn-outline-success">
             Create Book
           </button>
